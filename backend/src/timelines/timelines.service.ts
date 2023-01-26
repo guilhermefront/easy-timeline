@@ -21,4 +21,12 @@ export class TimelinesService {
       },
     });
   }
+
+  upsertTimeline(timeline: Timelines) {
+    return this.db.timelines.upsert({
+      where: { timeline_id: +JSON.stringify(timeline.timeline_id) },
+      update: timeline,
+      create: timeline,
+    });
+  }
 }
