@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { Timelines } from '@prisma/client';
 import { TimelinesService } from './timelines.service';
 
@@ -19,5 +27,10 @@ export class TimelinesController {
   @Patch()
   patchTimeline(@Body() timeline: Timelines) {
     return this.timelinesService.upsertTimeline(timeline);
+  }
+
+  @Delete('/:timelineId')
+  deleteTimeline(@Param('timelineId') timelineId: string) {
+    return this.timelinesService.deleteTimeline(timelineId);
   }
 }

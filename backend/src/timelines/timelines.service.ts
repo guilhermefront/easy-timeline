@@ -14,7 +14,7 @@ export class TimelinesService {
 
   getTimelineById(timelineId: string) {
     return this.db.timelines.findUnique({
-      where: { timeline_id: +timelineId },
+      where: { timeline_id: Number(timelineId) },
       select: {
         title: true,
         Events: true,
@@ -27,6 +27,14 @@ export class TimelinesService {
       where: { timeline_id: +JSON.stringify(timeline.timeline_id) },
       update: timeline,
       create: timeline,
+    });
+  }
+
+  deleteTimeline(timelineId: string) {
+    return this.db.timelines.delete({
+      where: {
+        timeline_id: Number(timelineId),
+      },
     });
   }
 }
