@@ -17,9 +17,13 @@ module.exports = {
       },
       colors: {
         label: '#4D5959',
+        primary: '#566963',
       },
       borderColor: {
         DEFAULT: '#BCBCBC',
+      },
+      fontFamily: {
+        sans: ['var(--font-poppins)'],
       },
     },
   },

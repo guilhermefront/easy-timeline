@@ -1,4 +1,12 @@
+import { Poppins } from '@next/font/google';
 import '../styles/globals.css';
+
+const poppins = Poppins({
+  weight: ['300', '400', '500', '600'],
+  display: 'swap',
+  fallback: ['Arial'],
+  variable: '--font-poppins',
+});
 
 export default function RootLayout({
   children,
@@ -6,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html className={poppins.variable} lang="en">
       <head>
         <meta
           name="description"

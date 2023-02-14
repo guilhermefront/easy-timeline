@@ -1,6 +1,4 @@
-// import { Inter } from '@next/font/google'
-
-// const inter = Inter({ subsets: ['latin'] })
+import { Poppins } from '@next/font/google';
 
 export default function Home() {
   return (

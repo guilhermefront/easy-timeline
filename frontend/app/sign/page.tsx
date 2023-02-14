@@ -1,4 +1,4 @@
-import { Input } from 'components/input';
+import { SignupForm } from 'components/form';
 import Image from 'next/image';
 
 export default function Sign() {
@@ -12,12 +12,8 @@ export default function Sign() {
           className="object-cover flex"
         />
       </div>
-      <div className="w-1/2 bg">
-        <form className="px-20 flex justify-center items-center">
-          <h1 className="text-5xl font-semibold">Welcome to EasyTimeline</h1>
-          <Input label="Username" />
-          <button type="submit">Create Account</button>
-        </form>
+      <div className="w-full bg">
+        <SignupForm />
       </div>
     </div>
   );
