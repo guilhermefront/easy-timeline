@@ -18,6 +18,7 @@ module.exports = {
       colors: {
         label: '#4D5959',
         primary: '#566963',
+        ['primary-dark']: '#485853',
       },
       borderColor: {
         DEFAULT: '#BCBCBC',

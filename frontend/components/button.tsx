@@ -12,7 +12,7 @@ export const Button = (
       {...props}
       className={cx(
         props.className,
-        'py-2.5 bg-primary w-full text-white font-poppins text-base font-medium min-h-[46px] rounded'
+        'py-2.5 bg-primary w-full text-white font-poppins text-base font-medium min-h-[46px] rounded hover:bg-primary-dark'
       )}
     />
   );
