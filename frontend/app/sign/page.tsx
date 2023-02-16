@@ -1,3 +1,4 @@
+import AuthProvider from 'components/auth-provider';
 import { SignupForm } from 'components/form';
 import Image from 'next/image';
 
@@ -13,7 +14,9 @@ export default function Sign() {
         />
       </div>
       <div className="w-full bg">
-        <SignupForm />
+        <AuthProvider>
+          <SignupForm />
+        </AuthProvider>
       </div>
     </div>
   );
