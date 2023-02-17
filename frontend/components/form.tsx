@@ -17,7 +17,8 @@ export const SignupForm = () => {
 
   return (
     <div className="px-4 lg:px-20 flex flex-col my-auto justify-center items-center h-full">
-      <h1 className="text-4xl font-semibold text-center mb-8">
+      <small className="text-white text-sm mb-1">History is a joy.</small>
+      <h1 className="text-4xl font-semibold text-white text-center mb-8">
         Welcome to EasyTimeline
       </h1>
       <Button
