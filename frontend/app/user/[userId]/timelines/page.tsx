@@ -1,3 +1,7 @@
-export default function Timelines() {
-  return <div className="flex h-full"></div>;
-}
+import { SignedLayout } from 'components/signed-layout';
+
+const Timelines = () => {
+  return <SignedLayout>siu</SignedLayout>;
+};
+
+export default Timelines;

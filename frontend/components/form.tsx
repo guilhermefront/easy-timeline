@@ -8,7 +8,6 @@ export const SignupForm = () => {
   const { data, status } = useSession();
   const router = useRouter();
 
-  console.log(data?.user);
   useEffect(() => {
     if (status === 'authenticated') {
       router.push(`/user/${data?.user?.id}/timelines`);
