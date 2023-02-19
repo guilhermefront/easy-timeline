@@ -1,19 +1,8 @@
 'use client';
-import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { signIn } from 'next-auth/react';
 import { Button } from './button';
 
 export const SignupForm = () => {
-  const { data, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === 'authenticated') {
-      router.push(`/user/${data?.user?.id}/timelines`);
-    }
-  }, [data?.user?.id, router, status]);
-
   return (
     <div className="px-4 lg:px-20 flex flex-col my-auto justify-center items-center h-full">
       <small className="text-white text-sm mb-1">History is a joy.</small>

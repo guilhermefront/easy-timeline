@@ -1,23 +1,16 @@
-'use client';
-import { useSession } from 'next-auth/react';
-import { AuthProvider } from './auth-provider';
+import { getCurrentUser } from 'utils/get-current-user';
 
-const HeaderName = () => {
-  const { data } = useSession();
-  console.log(data);
+const HeaderName = async () => {
+  const email = await getCurrentUser();
   return (
     <header className="py-7 border-b border-b-[#D4D4D4]">
       <div className="text-[#271510] text-sm flex justify-end px-10">
-        {data?.user?.email}
+        {email?.email}
       </div>
     </header>
   );
 };
-
 export const Header = () => {
-  return (
-    <AuthProvider>
-      <HeaderName />
-    </AuthProvider>
-  );
+  /* @ts-expect-error Server Component */
+  return <HeaderName />;
 };
