@@ -1,3 +1,5 @@
+const withSvgr = require('next-plugin-svgr');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -7,4 +9,10 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withSvgr({
+  ...nextConfig,
+  svgrOptions: {
+    dimensions: false,
+    icon: 24,
+  },
+});

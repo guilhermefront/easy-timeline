@@ -5,11 +5,13 @@ import { getCurrentUser } from 'utils/get-current-user';
 const getMyTimelines = async () => {
   const user = await getCurrentUser();
 
-  const response = await fetchClient(`user/${user?.id}/timelines`);
+  if (user?.id) {
+    const response = await fetchClient(`user/${user?.id}/timelines`);
+    const data = await response.json();
+    return data;
+  }
 
-  const data = await response.json();
-  console.log(data);
-  return data;
+  return null;
 };
 
 const Timelines = async () => {
