@@ -19,6 +19,7 @@ module.exports = {
         label: '#4D5959',
         primary: '#566963',
         ['primary-dark']: '#485853',
+        title: '#271510',
       },
       borderColor: {
         DEFAULT: '#BCBCBC',

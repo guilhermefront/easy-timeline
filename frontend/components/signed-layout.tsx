@@ -4,7 +4,7 @@ export const SignedLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <Header />
-      <main>{children}</main>
+      <main className="px-4 lg:px-8">{children}</main>
     </div>
   );
 };

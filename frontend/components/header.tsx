@@ -1,11 +1,22 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { routes } from 'utils/constants';
 import { getCurrentUser } from 'utils/get-current-user';
 
 const HeaderName = async () => {
-  const email = await getCurrentUser();
+  const user = await getCurrentUser();
   return (
-    <header className="py-7 border-b border-b-[#D4D4D4]">
-      <div className="text-[#271510] text-sm flex justify-end px-10">
-        {email?.email}
+    <header className="py-4 border-b border-b-[#D4D4D4]">
+      <div className="text-sm flex justify-end px-10">
+        <Link href={routes.myTimelines}>
+          <Image
+            alt={user.email}
+            src={user.image}
+            width={48}
+            height={48}
+            className="rounded-full"
+          />
+        </Link>
       </div>
     </header>
   );

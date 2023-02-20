@@ -1,5 +1,6 @@
 'use client';
 import { signIn } from 'next-auth/react';
+import { routes } from 'utils/constants';
 import { Button } from './button';
 
 export const SignupForm = () => {
@@ -12,7 +13,7 @@ export const SignupForm = () => {
       <Button
         className="max-w-[470px]"
         onClick={() => {
-          signIn('google');
+          signIn('google', { callbackUrl: routes.myTimelines });
         }}
         type="button"
       >
