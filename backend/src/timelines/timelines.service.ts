@@ -6,6 +6,19 @@ import { DatabaseService } from 'src/prisma/prisma.service';
 export class TimelinesService {
   constructor(private readonly db: DatabaseService) {}
 
+  createEmptyTimeline(userId: string) {
+    return this.db.timelines.create({
+      data: {
+        title: 'New timeline',
+        User: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+    });
+  }
+
   createTimeline(timeline: Omit<Timelines, 'timeline_id'>) {
     return this.db.timelines.create({
       data: timeline,

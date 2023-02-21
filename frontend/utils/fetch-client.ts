@@ -1,4 +1,5 @@
-export const fetchClient = (url: string, config?: RequestInit) => {
-  const finalUrl = process.env.NEXT_PUBLIC_API_URL! + url;
-  return fetch(finalUrl, config);
-};
+import axios from 'axios';
+
+export const apiClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+});

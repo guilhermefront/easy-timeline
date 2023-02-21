@@ -7,7 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { Timelines } from '@prisma/client';
+import { Timelines, User } from '@prisma/client';
 import { TimelinesService } from './timelines.service';
 
 @Controller('timelines')
@@ -17,6 +17,11 @@ export class TimelinesController {
   @Get(':timelineId')
   eventsByTimelineId(@Param('timelineId') timelineId: string) {
     return this.timelinesService.getTimelineById(timelineId);
+  }
+
+  @Post('/create-empty')
+  createEmptyTimeline(@Body() user: { userId: User['id'] }) {
+    return this.timelinesService.createEmptyTimeline(user?.userId);
   }
 
   @Post('/create')

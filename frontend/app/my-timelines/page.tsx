@@ -1,13 +1,13 @@
 import { SignedLayout } from 'components/signed-layout';
-import { fetchClient } from 'utils/fetch-client';
+import { Timeline } from 'components/timeline';
+import { apiClient } from 'utils/fetch-client';
 import { getCurrentUser } from 'utils/get-current-user';
 
 const getMyTimelines = async () => {
   const user = await getCurrentUser();
 
   if (user?.id) {
-    const response = await fetchClient(`user/${user?.id}/timelines`);
-    const data = await response.json();
+    const { data } = await apiClient(`user/${user?.id}/timelines`);
     return data;
   }
 
@@ -21,10 +21,9 @@ const Timelines = async () => {
       <h1 className="text-3xl font-semibold text-title mb-6 mt-12">
         YOUR TIMELINES
       </h1>
-      <ul>
-        {}
-        <li>Create one</li>
-      </ul>
+      <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
+        <Timeline create />
+      </div>
     </SignedLayout>
   );
 };
