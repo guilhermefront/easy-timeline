@@ -3,6 +3,7 @@
 import CreateIcon from '@assets/create.svg';
 import { SessionProvider, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { ReactNode } from 'react';
 import { routes } from 'utils/constants';
 import { apiClient } from 'utils/fetch-client';
 

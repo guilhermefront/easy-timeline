@@ -31,7 +31,7 @@ export class TimelinesController {
 
   @Patch()
   patchTimeline(@Body() timeline: Timelines) {
-    return this.timelinesService.upsertTimeline(timeline);
+    return this.timelinesService.updateTimeline(timeline);
   }
 
   @Delete('/:timelineId')

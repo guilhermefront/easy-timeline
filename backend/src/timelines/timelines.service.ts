@@ -27,26 +27,21 @@ export class TimelinesService {
 
   getTimelineById(timelineId: string) {
     return this.db.timelines.findUnique({
-      where: { timeline_id: Number(timelineId) },
-      select: {
-        title: true,
-        Events: true,
-      },
+      where: { timeline_id: timelineId },
     });
   }
 
-  upsertTimeline(timeline: Timelines) {
-    return this.db.timelines.upsert({
-      where: { timeline_id: +JSON.stringify(timeline.timeline_id) },
-      update: timeline,
-      create: timeline,
+  updateTimeline(timeline: Timelines) {
+    return this.db.timelines.update({
+      where: { timeline_id: timeline.timeline_id },
+      data: timeline,
     });
   }
 
   deleteTimeline(timelineId: string) {
     return this.db.timelines.delete({
       where: {
-        timeline_id: Number(timelineId),
+        timeline_id: timelineId,
       },
     });
   }
