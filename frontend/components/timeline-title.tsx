@@ -14,8 +14,8 @@ export const TimelineTitle = function TimelineTitle({
   const { mutate } = useMutation();
   const [title] = useState(timeline.title || '');
 
-  const debouncedUpdate = useDebounce((title: string) => {
-    mutate(() =>
+  const debouncedUpdate = useDebounce(async (title: string) => {
+    await mutate(() =>
       apiClient.patch('/timelines', {
         title,
         timeline_id: timeline.timeline_id,
@@ -28,10 +28,10 @@ export const TimelineTitle = function TimelineTitle({
       suppressHydrationWarning
       suppressContentEditableWarning
       contentEditable
-      className="text-[42px] font-semibold"
-      onInput={(e) => {
+      className="text-[42px] max-w-[420px] uppercase font-semibold break-words"
+      onInput={async (e) => {
         const updatedTitle = e.currentTarget.textContent;
-        debouncedUpdate(updatedTitle);
+        await debouncedUpdate(updatedTitle);
       }}
     >
       {title}

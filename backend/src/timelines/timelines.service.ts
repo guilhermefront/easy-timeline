@@ -28,6 +28,9 @@ export class TimelinesService {
   getTimelineById(timelineId: string) {
     return this.db.timelines.findUnique({
       where: { timeline_id: timelineId },
+      include: {
+        Events: true,
+      },
     });
   }
 

@@ -34,7 +34,7 @@ export class TimelinesController {
     return this.timelinesService.updateTimeline(timeline);
   }
 
-  @Delete('/:timelineId')
+  @Delete(':timelineId')
   deleteTimeline(@Param('timelineId') timelineId: string) {
     return this.timelinesService.deleteTimeline(timelineId);
   }

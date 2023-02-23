@@ -16,6 +16,8 @@ model Events {
   content     String
   image       String?
   link        String?
+  year        String
+  order       Int       @default(autoincrement())
   Timelines   Timelines @relation(fields: [timeline_id], references: [timeline_id], onDelete: NoAction, onUpdate: NoAction)
 }
 

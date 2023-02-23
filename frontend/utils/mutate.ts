@@ -4,8 +4,8 @@ import { startTransition } from 'react';
 
 export const useMutation = () => {
   const router = useRouter();
-  const mutate = (cb: () => void) => {
-    cb();
+  const mutate = async (cb: () => void) => {
+    await cb();
     startTransition(() => {
       router.refresh();
     });
