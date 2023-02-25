@@ -25,13 +25,26 @@ export class TimelinesService {
     });
   }
 
-  getTimelineById(timelineId: string) {
-    return this.db.timelines.findUnique({
+  async getTimelineById(timelineId: string) {
+    const timeline = await this.db.timelines.findUnique({
       where: { timeline_id: timelineId },
-      include: {
-        Events: true,
+    });
+
+    const events = await this.db.events.findMany({
+      orderBy: {
+        year: 'asc',
+      },
+      where: {
+        timeline_id: timelineId,
       },
     });
+
+    console.log(events);
+
+    return {
+      ...timeline,
+      events,
+    };
   }
 
   updateTimeline(timeline: Timelines) {

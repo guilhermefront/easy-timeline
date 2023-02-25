@@ -10,14 +10,13 @@ datasource db {
 
 model Events {
   event_id    String    @id @default(cuid())
-  timeline_id String    @unique
+  timeline_id String
   created_at  DateTime? @default(now()) @db.Timestamptz(6)
   title       String
   content     String
   image       String?
   link        String?
   year        String
-  order       Int       @default(autoincrement())
   Timelines   Timelines @relation(fields: [timeline_id], references: [timeline_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
@@ -26,7 +25,7 @@ model Timelines {
   id          String
   created_at  DateTime? @default(now()) @db.Timestamptz(6)
   title       String
-  Events      Events?
+  Events      Events[]
   User        User      @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 

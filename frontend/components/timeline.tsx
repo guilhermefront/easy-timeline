@@ -19,7 +19,6 @@ interface CommonTimeline {
 
 const CreateTimelineButton = () => {
   const session = useSession();
-  console.log(session?.data?.user?.id);
   const router = useRouter();
   return (
     <button

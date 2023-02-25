@@ -1,9 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "dev": "concurrently 'cd ./frontend && yarn dev -p 3001' 'cd ./backend && yarn dev'",
+    "dev": "concurrently 'cd ./frontend && yarn dev -p 3000' 'cd ./backend && yarn dev'",
     "dev:fe": "cd ./frontend && yarn dev",
-    "dev:be": "cd ./backend && yarn dev"
+    "dev:be": "cd ./backend && yarn dev",
+    "db:push": "cd ./backend && yarn prisma db push",
+    "db:generate": "cd ./backend && yarn prisma generate"
   },
   "workspaces": [
     "frontend",

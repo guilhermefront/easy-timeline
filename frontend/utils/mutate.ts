@@ -1,14 +1,10 @@
-import { AxiosRequestConfig } from 'axios';
 import { useRouter } from 'next/navigation';
-import { startTransition } from 'react';
 
 export const useMutation = () => {
   const router = useRouter();
-  const mutate = async (cb: () => void) => {
+  const mutate = async (cb) => {
     await cb();
-    startTransition(() => {
-      router.refresh();
-    });
+    router.refresh();
   };
 
   return { mutate };

@@ -7,7 +7,6 @@ export class EventsService {
   constructor(private readonly db: DatabaseService) {}
 
   createEmptyEvent(timelineId: string) {
-    console.log(timelineId);
     return this.db.events.create({
       data: {
         content: 'New event content',
@@ -25,6 +24,15 @@ export class EventsService {
   createEvent(event: Events) {
     return this.db.events.create({
       data: event,
+    });
+  }
+
+  editEvent(event: Events) {
+    return this.db.events.update({
+      data: event,
+      where: {
+        event_id: event.event_id,
+      },
     });
   }
 }

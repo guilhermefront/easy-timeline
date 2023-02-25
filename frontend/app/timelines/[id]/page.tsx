@@ -1,5 +1,4 @@
 import { Events, Timelines } from '@prisma/client';
-import { Timeline } from 'components/timeline';
 import { TimelineCard } from 'components/timeline-card';
 import { TimelineTitle } from 'components/timeline-title';
 import { apiClient } from 'utils/fetch-client';
@@ -14,14 +13,20 @@ const getTimeline = async (id: string) => {
 
 const TimelinePage = async ({ params }) => {
   const timeline = await getTimeline(params.id);
-  console.log(timeline);
   return (
-    <div className="pt-11 pl-11">
+    <div className="pl-11 flex gap-12">
       <TimelineTitle timeline={timeline} />
-      <TimelineCard create timelineId={timeline.timeline_id} />
-      {/* {timeline.events?.map((event) => (
-        <TimelineCard key={event.event_id} event={event} />
-      ))} */}
+      <div className="flex overflow-auto">
+        {timeline?.events?.map((event, i) => (
+          <TimelineCard
+            {...event}
+            key={event.event_id}
+            timelineId={timeline.timeline_id}
+            order={i + 1}
+          />
+        ))}
+        <TimelineCard create timelineId={timeline.timeline_id} />
+      </div>
     </div>
   );
 };

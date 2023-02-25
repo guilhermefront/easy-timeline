@@ -28,7 +28,7 @@ export const TimelineTitle = function TimelineTitle({
       suppressHydrationWarning
       suppressContentEditableWarning
       contentEditable
-      className="text-[42px] max-w-[420px] uppercase font-semibold break-words"
+      className="text-[42px] mt-11 min-w-[300px] max-w-[300px] uppercase font-semibold break-words"
       onInput={async (e) => {
         const updatedTitle = e.currentTarget.textContent;
         await debouncedUpdate(updatedTitle);
