@@ -9,14 +9,30 @@ import { apiClient } from 'utils/fetch-client';
 import { useMutation } from 'utils/mutate';
 import { useDebounce } from 'utils/use-debounce';
 
-interface TimelineCard extends Events {
-  create?: boolean;
-  timelineId: string;
-}
+export const CreateTimelineCard = ({ timelineId }: { timelineId: string }) => {
+  const { mutate } = useMutation();
+  return (
+    <article className="px-6 lg:min-h-[620px] shrink-0 flex items-center text-center justify-center min-w-[270px] py-11 border-x border-[#D4D4D4]">
+      <button
+        onClick={async () => {
+          await mutate(() => {
+            apiClient.post('/events/create-empty', {
+              timelineId,
+            });
+          });
+        }}
+        className="font-bold flex gap-2 flex-col mx-auto"
+        type="button"
+      >
+        <CreateIcon width={24} className="mx-auto" />
+        <div>Create event</div>
+      </button>
+    </article>
+  );
+};
 
 export const TimelineCard = ({
-  create,
-  timelineId,
+  timeline_id: timelineId,
   year,
   order,
   title,
@@ -24,7 +40,7 @@ export const TimelineCard = ({
   image,
   event_id: eventId,
   link,
-}: TimelineCard) => {
+}: Events) => {
   const { mutate } = useMutation();
 
   const defaultInfo = useRef({ year, order, title, content, image, link });
@@ -50,27 +66,6 @@ export const TimelineCard = ({
     },
     500
   );
-
-  if (create) {
-    return (
-      <article className="px-6 lg:min-h-[620px] shrink-0 flex items-center text-center justify-center min-w-[270px] py-11 border-x border-[#D4D4D4]">
-        <button
-          onClick={async () => {
-            await mutate(() => {
-              apiClient.post('/events/create-empty', {
-                timelineId,
-              });
-            });
-          }}
-          className="font-bold flex gap-2 flex-col mx-auto"
-          type="button"
-        >
-          <CreateIcon width={24} className="mx-auto" />
-          <div>Create event</div>
-        </button>
-      </article>
-    );
-  }
 
   return (
     <article className="px-6 py-11 min-w-[270px] max-w-[270px] shrink-0 border-l border-[#D4D4D4]">
@@ -119,13 +114,38 @@ export const TimelineCard = ({
       >
         {defaultInfo.current.title}
       </h3>
-      <p className="text-xs text-[#25120D] mb-20">{content}</p>
+      <p
+        contentEditable
+        onInput={(e) => {
+          const qtyChars = e.currentTarget.textContent?.length || 0;
+          const maxChars = 200;
+          if (qtyChars > 0 && qtyChars <= maxChars) {
+            handleChange(e.currentTarget.textContent, 'content');
+          } else {
+            toast.error(
+              qtyChars === 0
+                ? 'Content should have at least 1 character'
+                : `Content should have at most ${maxChars} characters. Currently it has ${qtyChars}, which is ${
+                    qtyChars - maxChars
+                  } more than the max allowed.`,
+              { id: 'error-content' }
+            );
+          }
+        }}
+        title="content"
+        className="text-xs text-[#25120D] mb-20"
+      >
+        {defaultInfo.current.content}
+      </p>
 
-      <div className="h-[204px] rounded bg-[#D9D9D9] relative w-full">
-        {image && title && (
-          <Image alt={title} src={image} className="object-cover" fill />
-        )}
-      </div>
+      <label>
+        <input title="image" type="file" />
+        <div className="h-[204px] rounded bg-[#D9D9D9] relative w-full">
+          {image && title && (
+            <Image alt={title} src={image} className="object-cover" fill />
+          )}
+        </div>
+      </label>
       <Toaster position="bottom-right" containerStyle={{ paddingRight: 500 }} />
     </article>
   );

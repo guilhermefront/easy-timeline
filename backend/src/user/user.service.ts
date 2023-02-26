@@ -7,12 +7,18 @@ export class UserService {
   findOne(id: string) {
     return this.db.user.findUnique({ where: { id } });
   }
-  findUserTimelines(id: string) {
-    const { Timelines } = this.db.user.findUnique({
+  async findUserTimelines(id: string) {
+    const { Timelines } = await this.db.user.findUnique({
       where: { id },
-      select: { Timelines: true },
+      select: {
+        Timelines: {
+          include: {
+            Events: true,
+          },
+        },
+      },
     });
 
-    return { timelines: Timelines };
+    return [...Timelines];
   }
 }

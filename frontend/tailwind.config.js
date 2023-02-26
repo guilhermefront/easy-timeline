@@ -23,6 +23,7 @@ module.exports = {
       },
       borderColor: {
         DEFAULT: '#BCBCBC',
+        600: '#BDBDBD',
       },
       fontFamily: {
         sans: ['var(--font-poppins)'],
