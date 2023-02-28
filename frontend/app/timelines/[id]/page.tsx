@@ -18,7 +18,11 @@ const TimelinePage = async ({ params }) => {
       <TimelineTitle timeline={timeline} />
       <div className="flex overflow-auto">
         {timeline?.events?.map((event, i) => (
-          <TimelineCard {...event} key={event.year} order={i + 1} />
+          <TimelineCard
+            {...event}
+            key={event.event_id + event.year}
+            order={i + 1}
+          />
         ))}
         <CreateTimelineCard timelineId={timeline.timeline_id} />
       </div>
