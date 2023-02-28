@@ -17,16 +17,16 @@ model Events {
   image       String?
   link        String?
   year        String
-  Timelines   Timelines? @relation(fields: [timeline_id], references: [timeline_id], onDelete: SetNull, onUpdate: NoAction)
+  Timelines   Timelines? @relation(fields: [timeline_id], references: [timeline_id], onDelete: SetNull, onUpdate: SetNull)
 }
 
 model Timelines {
   timeline_id String    @id @default(cuid())
-  id          String
+  id          String?
   created_at  DateTime? @default(now()) @db.Timestamptz(6)
   title       String
   Events      Events[]
-  User        User      @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User        User?     @relation(fields: [id], references: [id], onDelete: SetNull, onUpdate: SetNull)
 }
 
 model User {

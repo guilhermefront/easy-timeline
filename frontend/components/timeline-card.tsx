@@ -8,6 +8,7 @@ import { toast, Toaster } from 'react-hot-toast';
 import { apiClient } from 'utils/fetch-client';
 import { useMutation } from 'utils/mutate';
 import { useDebounce } from 'utils/use-debounce';
+import { BiTrashAlt } from 'react-icons/bi';
 
 export const CreateTimelineCard = ({ timelineId }: { timelineId: string }) => {
   const { mutate } = useMutation();
@@ -15,8 +16,8 @@ export const CreateTimelineCard = ({ timelineId }: { timelineId: string }) => {
     <article className="px-6 lg:min-h-[620px] shrink-0 flex items-center text-center justify-center min-w-[270px] py-11 border-x border-[#D4D4D4]">
       <button
         onClick={async () => {
-          await mutate(() => {
-            apiClient.post('/events/create-empty', {
+          await mutate(async () => {
+            await apiClient.post('/events/create-empty', {
               timelineId,
             });
           });
@@ -69,19 +70,20 @@ export const TimelineCard = ({
   return (
     <article className="px-6 py-11 min-w-[270px] relative max-w-[270px] shrink-0 border-l border-[#D4D4D4]">
       <button
-        onClick={() => {
-          mutate(() => {
-            apiClient.delete(`/events/${timelineId}`);
+        onClick={async () => {
+          await mutate(async () => {
+            await apiClient.delete(`/events/${eventId}`);
           });
         }}
-        className="absolute top-4 right-6"
+        className="absolute top-4 right-[22px]"
         type="button"
       >
-        Delete
+        <BiTrashAlt className="text-gray-400 hover:text-gray-800" width={16} />
       </button>
       <div className="flex justify-between items-center">
         <p
           title="year"
+          suppressContentEditableWarning
           contentEditable
           onInput={(e) => {
             const currentYear = Number(e.currentTarget.textContent);
@@ -103,6 +105,7 @@ export const TimelineCard = ({
       </div>
       <h3
         contentEditable
+        suppressContentEditableWarning
         onInput={(e) => {
           const qtyChars = e.currentTarget.innerHTML?.length || 0;
           const maxChars = 30;
@@ -125,6 +128,7 @@ export const TimelineCard = ({
       />
       <p
         contentEditable
+        suppressContentEditableWarning
         onInput={(e) => {
           console.log(e.currentTarget.innerHTML);
           const qtyChars = e.currentTarget.innerHTML?.length || 0;

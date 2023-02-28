@@ -36,7 +36,7 @@ export class EventsService {
     });
   }
 
-  deleteEvent(eventId: string) {
+  async deleteEvent(eventId: string) {
     return this.db.events.delete({
       where: {
         event_id: eventId,
