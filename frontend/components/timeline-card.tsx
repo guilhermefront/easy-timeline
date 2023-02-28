@@ -34,16 +34,16 @@ export const CreateTimelineCard = ({ timelineId }: { timelineId: string }) => {
 export const TimelineCard = ({
   timeline_id: timelineId,
   year,
-  order,
   title,
   content,
   image,
   event_id: eventId,
   link,
-}: Events) => {
+  order,
+}: Events & { order: number }) => {
   const { mutate } = useMutation();
 
-  const defaultInfo = useRef({ year, order, title, content, image, link });
+  const defaultInfo = useRef({ year, title, content, image, link });
 
   const handleChange = useDebounce(
     async (value, field: 'content' | 'year' | 'link' | 'image' | 'title') => {
@@ -53,7 +53,6 @@ export const TimelineCard = ({
         content,
         image,
         link,
-        order,
         title,
         year,
       };
@@ -62,7 +61,7 @@ export const TimelineCard = ({
       await mutate(async () => {
         await apiClient.patch('/events', data);
       });
-      toast.success(`Updated ${field} to ${value}`);
+      toast.success(`Updated ${field} to ${value.split('<br>').join('\n')}`);
     },
     500
   );
@@ -86,7 +85,7 @@ export const TimelineCard = ({
           contentEditable
           onInput={(e) => {
             const currentYear = Number(e.currentTarget.textContent);
-            const maxYear = new Date().getFullYear();
+            const maxYear = 99999999;
             if (currentYear > 0 && currentYear <= maxYear) {
               handleChange(e.currentTarget.textContent, 'year');
             } else {
@@ -105,10 +104,10 @@ export const TimelineCard = ({
       <h3
         contentEditable
         onInput={(e) => {
-          const qtyChars = e.currentTarget.textContent?.length || 0;
+          const qtyChars = e.currentTarget.innerHTML?.length || 0;
           const maxChars = 30;
           if (qtyChars > 0 && qtyChars <= maxChars) {
-            handleChange(e.currentTarget.textContent, 'title');
+            handleChange(e.currentTarget.innerHTML, 'title');
           } else {
             toast.error(
               qtyChars === 0
@@ -121,17 +120,17 @@ export const TimelineCard = ({
           }
         }}
         title="title"
+        dangerouslySetInnerHTML={{ __html: defaultInfo.current.title }}
         className="text-2xl max-w-[220px] break-words font-medium uppercase mt-9 mb-6 text-[#944D3B]"
-      >
-        {defaultInfo.current.title}
-      </h3>
+      />
       <p
         contentEditable
         onInput={(e) => {
-          const qtyChars = e.currentTarget.textContent?.length || 0;
+          console.log(e.currentTarget.innerHTML);
+          const qtyChars = e.currentTarget.innerHTML?.length || 0;
           const maxChars = 200;
           if (qtyChars > 0 && qtyChars <= maxChars) {
-            handleChange(e.currentTarget.textContent, 'content');
+            handleChange(e.currentTarget.innerHTML, 'content');
           } else {
             toast.error(
               qtyChars === 0
@@ -145,9 +144,8 @@ export const TimelineCard = ({
         }}
         title="content"
         className="text-xs text-[#25120D] mb-20"
-      >
-        {defaultInfo.current.content}
-      </p>
+        dangerouslySetInnerHTML={{ __html: defaultInfo.current.content }}
+      />
 
       <label>
         <input title="image" type="file" />
