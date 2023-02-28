@@ -1,5 +1,5 @@
 import { EventsService } from './events.service';
-import { Body, Controller, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Patch, Post } from '@nestjs/common';
 import { Events } from '@prisma/client';
 
 @Controller('events')
@@ -19,5 +19,10 @@ export class EventsController {
   @Patch('')
   editEvent(@Body() event: Events) {
     return this.eventsService.editEvent(event);
+  }
+
+  @Delete(':eventId')
+  deleteEvent(@Param('eventId') eventId: string) {
+    return this.eventsService.deleteEvent(eventId);
   }
 }

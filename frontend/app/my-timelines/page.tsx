@@ -23,7 +23,6 @@ const getMyTimelines = async () => {
 
 const Timelines = async () => {
   const timelines = await getMyTimelines();
-  console.log(timelines);
   return (
     <SignedLayout>
       <h1 className="text-3xl font-semibold text-title mb-6 mt-12">

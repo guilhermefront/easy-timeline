@@ -39,8 +39,6 @@ export class TimelinesService {
       },
     });
 
-    console.log(events);
-
     return {
       ...timeline,
       events,

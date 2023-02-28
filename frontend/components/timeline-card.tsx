@@ -68,7 +68,18 @@ export const TimelineCard = ({
   );
 
   return (
-    <article className="px-6 py-11 min-w-[270px] max-w-[270px] shrink-0 border-l border-[#D4D4D4]">
+    <article className="px-6 py-11 min-w-[270px] relative max-w-[270px] shrink-0 border-l border-[#D4D4D4]">
+      <button
+        onClick={() => {
+          mutate(() => {
+            apiClient.delete(`/events/${timelineId}`);
+          });
+        }}
+        className="absolute top-4 right-6"
+        type="button"
+      >
+        Delete
+      </button>
       <div className="flex justify-between items-center">
         <p
           title="year"
