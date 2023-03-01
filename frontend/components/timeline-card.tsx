@@ -2,13 +2,13 @@
 
 import CreateIcon from '@assets/create.svg';
 import { Events } from '@prisma/client';
-import Image from 'next/image';
 import { useRef } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
 import { apiClient } from 'utils/fetch-client';
 import { useMutation } from 'utils/mutate';
 import { useDebounce } from 'utils/use-debounce';
 import { BiTrashAlt } from 'react-icons/bi';
+import { cx } from 'utils/cx';
 
 export const CreateTimelineCard = ({ timelineId }: { timelineId: string }) => {
   const { mutate } = useMutation();
@@ -151,11 +151,35 @@ export const TimelineCard = ({
         dangerouslySetInnerHTML={{ __html: defaultInfo.current.content }}
       />
 
-      <label>
-        <input title="image" type="file" />
-        <div className="h-[204px] rounded bg-[#D9D9D9] relative w-full">
-          {image && title && (
-            <Image alt={title} src={image} className="object-cover" fill />
+      <label className="cursor-pointer">
+        <input
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file?.size && file.size < 50000) {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                handleChange(reader.result, 'image');
+              };
+              reader.readAsDataURL(file);
+            } else {
+              toast.error(
+                'Image needs to be less than 500kb. Please, compress or send a smaller version.'
+              );
+            }
+          }}
+          className="hidden"
+          title="image"
+          type="file"
+        />
+        <div
+          className={cx('h-[204px] flex items-center rounded relative w-full', {
+            'bg-[#D9D9D9]': Boolean(defaultInfo?.current?.image),
+          })}
+        >
+          {defaultInfo.current?.image && title && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img alt={title} src={defaultInfo.current.image} className="" />
           )}
         </div>
       </label>
