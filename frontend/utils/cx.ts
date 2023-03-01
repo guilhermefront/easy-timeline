@@ -1,2 +1,2 @@
-export const cx = (...classNames: (string | undefined)[]) =>
-  classNames.filter(Boolean).join(' ');
+import clsx from 'clsx';
+export const cx = clsx;
