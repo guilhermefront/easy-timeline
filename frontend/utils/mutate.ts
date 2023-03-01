@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { startTransition, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 export const useMutation = () => {
@@ -9,7 +9,9 @@ export const useMutation = () => {
     setIsLoading(true);
     const toastId = toast.loading('Loading...');
     await cb();
-    router.refresh();
+    startTransition(() => {
+      router.refresh();
+    });
     toast.dismiss(toastId);
     setIsLoading(false);
   };
