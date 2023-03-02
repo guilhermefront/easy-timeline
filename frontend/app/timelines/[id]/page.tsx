@@ -11,6 +11,12 @@ const getTimeline = async (id: string) => {
   return data;
 };
 
+export const generateMetadata = async ({ params }) => {
+  const timeline = await getTimeline(params.id);
+
+  return { title: `${timeline.title.toUpperCase()} | EasyTimeline` };
+};
+
 const TimelinePage = async ({ params }) => {
   const timeline = await getTimeline(params.id);
   return (
