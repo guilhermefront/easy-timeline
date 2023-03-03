@@ -20,17 +20,24 @@ export const generateMetadata = async ({ params }) => {
 const TimelinePage = async ({ params }) => {
   const timeline = await getTimeline(params.id);
   return (
-    <div className="pl-11 flex gap-12">
-      <TimelineTitle timeline={timeline} />
-      <div className="flex overflow-auto">
-        {timeline?.events?.map((event, i) => (
-          <TimelineCard
-            {...event}
-            key={event.event_id + event.year}
-            order={i + 1}
-          />
+    <div>
+      <div className="pl-11 flex gap-12">
+        <TimelineTitle timeline={timeline} />
+        <div className="flex overflow-auto">
+          {timeline?.events?.map((event, i) => (
+            <TimelineCard
+              {...event}
+              key={event.event_id + event.year}
+              order={i + 1}
+            />
+          ))}
+          <CreateTimelineCard timelineId={timeline.timeline_id} />
+        </div>
+      </div>
+      <div className="flex gap-2">
+        {timeline.events.map((events) => (
+          <p key={events.event_id}>{events.year}</p>
         ))}
-        <CreateTimelineCard timelineId={timeline.timeline_id} />
       </div>
     </div>
   );
