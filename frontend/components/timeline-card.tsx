@@ -174,7 +174,7 @@ export const TimelineCard = ({
         />
         <div
           className={cx('h-[204px] flex items-center rounded relative w-full', {
-            'bg-[#D9D9D9]': defaultInfo?.current?.image,
+            'bg-[#D9D9D9]': !defaultInfo?.current?.image,
           })}
         >
           {defaultInfo.current?.image && title && (
