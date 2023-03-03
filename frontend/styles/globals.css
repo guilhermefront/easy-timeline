@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html, body {
+  height: 100%;
+  color: #1E1E1E;
+}
+
+input, textarea {
+  background-color: transparent;
+  width: max-content;
+}
