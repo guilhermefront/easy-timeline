@@ -68,7 +68,10 @@ export const TimelineCard = ({
   );
 
   return (
-    <article className="px-6 py-11 min-w-[270px] relative max-w-[270px] shrink-0 border-l border-[#D4D4D4]">
+    <article
+      id={`event-${eventId}`}
+      className="px-6 py-11 min-w-[270px] relative max-w-[270px] shrink-0 border-l border-[#D4D4D4]"
+    >
       <button
         onClick={async () => {
           await mutate(async () => {

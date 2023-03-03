@@ -1,6 +1,7 @@
 import { Events, Timelines } from '@prisma/client';
 import { CreateTimelineCard, TimelineCard } from 'components/timeline-card';
 import { TimelineTitle } from 'components/timeline-title';
+import { TimelineYear } from 'components/timeline-year';
 import { apiClient } from 'utils/fetch-client';
 
 const getTimeline = async (id: string) => {
@@ -35,8 +36,12 @@ const TimelinePage = async ({ params }) => {
         </div>
       </div>
       <div className="flex gap-2">
-        {timeline.events.map((events) => (
-          <p key={events.event_id}>{events.year}</p>
+        {timeline.events.map((event) => (
+          <TimelineYear
+            eventId={event.event_id}
+            year={event.year}
+            key={event.event_id}
+          />
         ))}
       </div>
     </div>
