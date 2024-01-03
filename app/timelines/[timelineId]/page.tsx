@@ -1,1 +1,3 @@
-export default <div>whatever</div>;
+import SignedLayout from '../layout';
+
+export default SignedLayout;
