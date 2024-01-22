@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { routes } from '@/utils/constants';
 
-import { Logout } from '../../easy-timeline/frontend/components/logout';
 import { supabaseServerClient } from '@/utils/supabase/server';
 
 const HeaderName = async () => {
@@ -16,7 +16,7 @@ const HeaderName = async () => {
         <Link href="/timelines">EasyTImeline</Link>
         <div className="text-sm items-center gap-3 flex justify-end">
           <div>
-            <Link href={routes.myTimelines}>
+            <Link href={''}>
               <Image
                 alt={user?.email}
                 src={user?.image}
@@ -26,7 +26,7 @@ const HeaderName = async () => {
               />
             </Link>
           </div>
-          <Logout />
+          {/* <Logout /> */}
         </div>
       </div>
     </header>
