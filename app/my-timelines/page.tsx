@@ -8,7 +8,14 @@ export const metadata = {
 const MyTimelines = async () => {
   const supabase = supabaseServerClient();
 
-  const timelines = await supabase.from('Timelines').select();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { data: timelines } = await supabase
+    .from('Timelines')
+    .select()
+    .eq('user_id', user?.id);
   console.log(timelines);
 
   return <div>whatever</div>;
