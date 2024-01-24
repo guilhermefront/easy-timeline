@@ -16,7 +16,7 @@ const MyTimelines = async () => {
     .from('Timelines')
     .select()
     .eq('user_id', user?.id);
-  console.log(timelines);
+
 
   return <div>whatever</div>;
 };
