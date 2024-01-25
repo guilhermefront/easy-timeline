@@ -12,17 +12,17 @@ export const DeleteTimeline = ({
   timelineId: string;
   title: string;
 }) => {
-  const { trigger: deleteTimeline } = useMutation(
-    'delete-timeline',
-    async () => await apiClient.delete(`/timelines/${timelineId}`)
-  );
+  // const { trigger: deleteTimeline } = useMutation(
+  //   'delete-timeline',
+  //   async () => await apiClient.delete(`/timelines/${timelineId}`)
+  // );
   return (
     <button
       onClick={async (e) => {
         e.preventDefault();
         const toastId = toast.loading('Deleting timeline...');
         try {
-          deleteTimeline();
+          // deleteTimeline();
           toast.success(`Successfully deleted ${title}`);
         } catch {
           toast.error(`An error ocurred when deleting ${title}`);

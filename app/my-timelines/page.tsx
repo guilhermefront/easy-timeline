@@ -17,8 +17,9 @@ const MyTimelines = async () => {
     .select()
     .eq('user_id', user?.id);
 
+  console.log(user.id);
 
-  return <div>whatever</div>;
+  return <TimelinesGrid create timelines={timelines} />;
 };
 
 export default MyTimelines;

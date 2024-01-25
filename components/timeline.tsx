@@ -19,11 +19,11 @@ export const Timeline = ({
     <div className="relative">
       <div className="pl-5 pr-[30px] py-4 relative flex-col justify-between flex gap-4 h-full">
         <div className="flex justify-between">
-          <TimelineCardTitle
+          {/* <TimelineCardTitle
             title={title}
             timelineId={timelineId}
             className="font-bold relative z-10"
-          />
+          /> */}
           {allowDelete && (
             <DeleteTimeline title={title} timelineId={timelineId} />
           )}

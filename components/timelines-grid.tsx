@@ -22,7 +22,7 @@ export const TimelinesGrid = ({
             allowDelete={create}
           />
         ))}
-        {create && <CreateTimeline />}
+        {/* {create && <CreateTimeline />} */}
       </div>
     </>
   );
